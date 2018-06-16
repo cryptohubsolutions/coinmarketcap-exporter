@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6-alpine
 RUN pip install prometheus_client requests
 RUN mkdir -p /opt/coinmarketcap-exporter
 COPY ./Dockerfile /opt/coinmarketcap-exporter/

@@ -28,7 +28,7 @@ class CoinCollector():
         request_time = r.elapsed.total_seconds()
         log.info('elapsed time -' + str(request_time))
         response = json.loads(r.content.decode('UTF-8'))
-        if not response['data']:
+        if response['data'] is None:
             break
         # setup the metric
         metric = Metric('coinmarketcap_response_time', 'Total time for the coinmarketcap API to respond.', 'summary')
@@ -63,6 +63,7 @@ if __name__ == '__main__':
     REGISTRY.register(CoinCollector())
     start_http_server(int(args.port))
     while True:
+      log.info('Sleeping at: ' + time.ctime())
       time.sleep(60)
   except KeyboardInterrupt:
     print(" Interrupted")
